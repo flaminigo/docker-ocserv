@@ -71,6 +71,8 @@ COPY All /etc/ocserv/config-per-group/All
 COPY cn-no-route.txt /etc/ocserv/config-per-group/Route
 
 COPY docker-entrypoint.sh /entrypoint.sh
+COPY ocservauto.sh /etc/ocserv/ocservauto.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 443
