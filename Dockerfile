@@ -19,7 +19,6 @@ RUN buildDeps=" \
 		readline-dev \
 		tar \
 		xz \
-		bash \
 	"; \
 	set -x \
 	&& apk add --update --virtual .build-deps $buildDeps \
@@ -45,7 +44,7 @@ RUN buildDeps=" \
 			| xargs -r apk info --installed \
 			| sort -u \
 		)" \
-	&& apk add --virtual .run-deps $runDeps gnutls-utils iptables libnl3 readline \
+	&& apk add --virtual .run-deps $runDeps gnutls-utils iptables libnl3 readline bash \
 	&& apk del .build-deps \
 	&& rm -rf /var/cache/apk/*
 
