@@ -19,6 +19,7 @@ RUN buildDeps=" \
 		readline-dev \
 		tar \
 		xz \
+		bash \
 	"; \
 	set -x \
 	&& apk add --update --virtual .build-deps $buildDeps \
