@@ -134,3 +134,11 @@ The above command will delete the default user `test`, if you start the instance
 #### Change password
 
 Change password is exactly the same command as add user, please refer to the command mentioned above.
+
+#### Docker composer
+
+```bash
+docker-compose up -d ocserv
+```
+
+The above command composed the container.
