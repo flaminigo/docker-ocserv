@@ -142,3 +142,11 @@ docker-compose up -d ocserv
 ```
 
 The above command composed the container.
+
+#### Add client certification
+
+```bash
+add_cert.sh [username] [encryption password]
+```
+
+Use the script above to generate client certification. 
