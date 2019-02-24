@@ -74,6 +74,7 @@ COPY cn-no-route.txt /etc/ocserv/config-per-group/Route
 
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY ocservauto.sh /etc/ocserv/ocservauto.sh
+COPY add_cert.sh /etc/ocserv/add_cert.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 
