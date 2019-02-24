@@ -3,7 +3,7 @@ services:
   ocserv:
     image: flaminigo/ocserv-github
     restart: always
-    container_name: ocserv-test
+    container_name: ocserv-github
     privileged: true
     hostname: www.example.com
     ports:
