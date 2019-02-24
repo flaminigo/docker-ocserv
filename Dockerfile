@@ -44,7 +44,7 @@ RUN buildDeps=" \
 			| xargs -r apk info --installed \
 			| sort -u \
 		)" \
-	&& apk add --virtual .run-deps $runDeps gnutls-utils iptables libnl3 readline bash \
+	&& apk add --virtual .run-deps $runDeps openssl gnutls-utils iptables libnl3 readline bash \
 	&& apk del .build-deps \
 	&& rm -rf /var/cache/apk/*
 
