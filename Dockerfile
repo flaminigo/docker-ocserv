@@ -62,7 +62,7 @@ RUN set -x \
 	&& sed -i 's/#enable-auth = "certificate"/enable-auth = "certificate"/' /etc/ocserv/ocserv.conf \
 	&& sed -i 's/\(^cookie-timeout = \)300/\186400/' /etc/ocserv/ocserv.conf \
 	&& sed -i '/\[vhost:www.example.com\]/,$d' /etc/ocserv/ocserv.conf \
-	&& sed -i 's|^[# \t]*\(crl = \).*|\1/etc/ocserv/crl.pem|'  /etc/ocserv/ocserv.conf \
+#	&& sed -i 's|^[# \t]*\(crl = \).*|\1/etc/ocserv/crl.pem|'  /etc/ocserv/ocserv.conf \
 	&& mkdir -p /etc/ocserv/config-per-group \
 	&& cat /tmp/groupinfo.txt >> /etc/ocserv/ocserv.conf \
 	&& rm -fr /tmp/cn-no-route.txt \
