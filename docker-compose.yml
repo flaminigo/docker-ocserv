@@ -11,6 +11,7 @@ services:
       - 995:443
     volumes:
       - ocserv-config:/etc/ocserv
+      - /etc/letsencrypt:/etc/letsencrypt
     environment:
       - CA_CN=VPN CA
       - CA_ORG=Big Corp
@@ -18,7 +19,24 @@ services:
       - SRV_CN=www.example.com
       - SRV_ORG=My Company
       - SRV_DAYS=9999
+    networks:
+      - vpn-share
+
+  ad-blocker:
+    image: oznu/dns-ad-blocker
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+    environment:
+      - NS1=1.1.1.1
+      - NS2=1.0.0.1
+      - AUTO_UPDATE=1
+    networks:
+      - vpn-share
 
 volumes:
   ocserv-config:
     driver: local
+
+networks:
+    vpn-share:
