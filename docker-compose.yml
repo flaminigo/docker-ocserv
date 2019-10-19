@@ -24,6 +24,8 @@ services:
 
   ad-blocker:
     image: oznu/dns-ad-blocker
+    restart: always
+    container_name: ad-blocker
     ports:
       - 53:53/tcp
       - 53:53/udp
@@ -31,6 +33,17 @@ services:
       - NS1=1.1.1.1
       - NS2=1.0.0.1
       - AUTO_UPDATE=1
+    networks:
+      - vpn-share
+
+  ikev2-vpn:
+    image: flaminigo/ike
+    restart: always
+    container_name: ikev2-vpn
+    privileged: true
+    ports:
+      - 500:500/udp
+      - 4500:4500/udp
     networks:
       - vpn-share
 
