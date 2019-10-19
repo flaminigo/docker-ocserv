@@ -20,7 +20,8 @@ services:
       - SRV_ORG=My Company
       - SRV_DAYS=9999
     networks:
-      - vpn-share
+      vpn-share:
+        ipv4_address: 172.16.238.10
 
   ad-blocker:
     image: oznu/dns-ad-blocker
@@ -34,7 +35,8 @@ services:
       - NS2=1.0.0.1
       - AUTO_UPDATE=1
     networks:
-      - vpn-share
+      vpn-share:
+        ipv4_address: 172.16.238.11
 
   ikev2-vpn:
     image: flaminigo/ike
@@ -45,7 +47,8 @@ services:
       - 500:500/udp
       - 4500:4500/udp
     networks:
-      - vpn-share
+      vpn-share:
+        ipv4_address: 172.16.238.12
 
 volumes:
   ocserv-config:
@@ -53,3 +56,8 @@ volumes:
 
 networks:
     vpn-share:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.16.238.0/24
