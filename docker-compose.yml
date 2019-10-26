@@ -50,8 +50,27 @@ services:
       vpn-share:
         ipv4_address: 172.16.238.12
 
+  radius:
+    image: freeradius/freeradius-server
+    restart: always
+    container_name: radius
+    ports:
+      - 1812:1812/udp
+      - 1813:1813/udp
+    networks:
+      vpn-share:
+        ipv4_address: 172.16.238.15
+    volumes:
+      - certs:/etc/raddb/certs
+      - radius-cfg:/etc/freeradius
+      - /etc/letsencrypt:/etc/letsencrypt
+
 volumes:
   ocserv-config:
+    driver: local
+  certs:
+    driver: local
+  radius-cfg:
     driver: local
 
 networks:
