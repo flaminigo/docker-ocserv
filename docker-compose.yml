@@ -51,7 +51,7 @@ services:
         ipv4_address: 172.16.238.12
 
   radius:
-    image: freeradius/freeradius-server
+    image: flaminigo/radius
     restart: always
     container_name: radius
     ports:
