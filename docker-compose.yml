@@ -30,6 +30,8 @@ services:
     ports:
       - 53:53/tcp
       - 53:53/udp
+    volumes:
+      - ad-blocker-config:/config
     environment:
       - NS1=1.1.1.1
       - NS2=1.0.0.1
@@ -68,6 +70,8 @@ volumes:
   ocserv-config:
     driver: local
   radius-cfg:
+    driver: local
+  ad-blocker-config:
     driver: local
 
 networks:
