@@ -93,8 +93,7 @@ services:
         ipv4_address: 172.16.238.16
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.music.rule=Host(`lucy.gigem.me`)"
-      - "traefik.http.routers.music.entrypoints=web"
+      - "traefik.frontend.rule=Host:main.localhost.com"
 
 volumes:
   ocserv-config:
