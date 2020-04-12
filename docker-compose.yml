@@ -1,25 +1,6 @@
 version: '3.0'
 services:
 
-  traefik:
-    image: traefik:v1.7
-    restart: always
-    container_name: traefik
-    ports:
-      - 80:80
-      - 443:443
-    networks:
-      default:
-      vpn-share:
-        ipv4_address: 172.16.238.100
-    volumes:
-      - $PWD/traefik.toml:/etc/traefik/traefik.toml
-      - $PWD/dyn.toml:/etc/traefik/dyn.toml
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-       - "traefik.frontend.rule=Host:monitor.localhost.com"
-       - "traefik.port=8080"
-
   ocserv:
     image: flaminigo/ocserv-github
     restart: always
@@ -48,9 +29,9 @@ services:
     image: oznu/dns-ad-blocker
     restart: always
     container_name: ad-blocker
-    #ports:
-      #- 53:53/tcp
-      #- 53:53/udp
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
     volumes:
       - ad-blocker-config:/config
     environment:
@@ -101,36 +82,6 @@ services:
       - "traefik.enable=true"
       - "traefik.frontend.rule=Host:main.localhost.com"
 
-  db:
-    image: mariadb
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
-    restart: always
-    volumes:
-      - db:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=x5SkEGr3256AecJSo0Gcb747Qad
-      - MYSQL_PASSWORD=x5SkEGr3256AecJSo0
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-
-  app:
-    image: nextcloud
-    #ports:
-    #  - 8080:80
-    links:
-      - db
-    volumes:
-      - nextcloud:/var/www/html
-      - /etc/letsencrypt:/etc/letsencrypt
-    networks:
-      vpn-share:
-        ipv4_address: 172.16.238.17
-    restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.frontend.rule=Host:cloud.localhost.com"
-      - "traefik.port=80"
-
 volumes:
   ocserv-config:
     driver: local
@@ -138,8 +89,6 @@ volumes:
     driver: local
   ad-blocker-config:
     driver: local
-  db:
-  nextcloud:
 
 networks:
     vpn-share:
