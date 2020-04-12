@@ -69,19 +69,6 @@ services:
       - radius-cfg:/opt/etc/raddb
       - /etc/letsencrypt:/etc/letsencrypt
 
-  music:
-    image: nondanee/unblockneteasemusic
-    restart: always
-    container_name: music
-    #ports:
-    #  - 80:8080
-    networks:
-      vpn-share:
-        ipv4_address: 172.16.238.16
-    labels:
-      - "traefik.enable=true"
-      - "traefik.frontend.rule=Host:main.localhost.com"
-
 volumes:
   ocserv-config:
     driver: local
