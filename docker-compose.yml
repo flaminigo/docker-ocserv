@@ -29,9 +29,9 @@ services:
     image: oznu/dns-ad-blocker
     restart: always
     container_name: ad-blocker
-    ports:
-      - 53:53/tcp
-      - 53:53/udp
+    #ports:
+    #  - 53:53/tcp
+    #  - 53:53/udp
     volumes:
       - ad-blocker-config:/config
     environment:
@@ -39,6 +39,25 @@ services:
       - NS2=1.0.0.1
       - AUTO_UPDATE=1
       - DNSCRYPT=1
+    networks:
+      vpn-share:
+        ipv4_address: 172.16.238.22
+
+  pi-hole:
+    image: pihole/pihole:latest
+    restart: always
+    container_name: pi-hole
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+    environment:
+      TZ: 'America/Chicago'
+    volumes:
+      - pihole-etc:/etc/pihole
+      - pihole-dnsmasq:/etc/dnsmasq.d
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
     networks:
       vpn-share:
         ipv4_address: 172.16.238.11
@@ -76,6 +95,8 @@ volumes:
     driver: local
   ad-blocker-config:
     driver: local
+  pihole-etc:
+  pihole-dnsmasq:
 
 networks:
     vpn-share:
