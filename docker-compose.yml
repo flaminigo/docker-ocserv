@@ -63,13 +63,17 @@ services:
         ipv4_address: 172.16.238.11
 
   ikev2-vpn:
-    image: flaminigo/ike
+    image: hwdsl2/ipsec-vpn-server
     restart: always
     container_name: ikev2-vpn
     privileged: true
     ports:
       - 500:500/udp
       - 4500:4500/udp
+    environment:
+      - VPN_IPSEC_PSK=psk
+      - VPN_USER=name
+      - VPN_PASSWORD=password
     networks:
       vpn-share:
         ipv4_address: 172.16.238.12
